@@ -19347,26 +19347,37 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-317d1a6e"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 
-var _hoisted_1 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Welcome", -1
+var _hoisted_1 = {
+  id: "container"
+};
+
+var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", null, "Header area", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_2 = ["textContent"];
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.list, function (item) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
-      key: item.id,
-      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.title)
-    }, null, 8
-    /* PROPS */
-    , _hoisted_2);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))])], 64
-  /* STABLE_FRAGMENT */
+var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", null, "Nav Area", -1
+  /* HOISTED */
   );
+});
+
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", null, " Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis inventore molestias alias nisi! Error eius aliquam, reprehenderit id dolorum itaque sit! Dolorem maxime soluta architecto optio aperiam! Quam veritatis earum nemo tempore nisi incidunt fugiat voluptatum, illum quia deleniti. Eius fuga at commodi doloremque tempora veritatis perspiciatis, consectetur consequatur quia. ", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("footer", null, "Footer area", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_6 = [_hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, _hoisted_6);
 }
 
 /***/ }),
@@ -19422,7 +19433,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "ul[data-v-317d1a6e] {\n  background-color: red;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body[data-v-317d1a6e] {\n  margin-top: 40px;\n}\n#container[data-v-317d1a6e] {\n  display: grid;\n  grid-template-columns: 150px auto;\n  grid-template-rows: 100px auto 150px;\n  grid-template-areas: \"header header\" \"nav main\" \"footer footer\";\n  grid-gap: 10px;\n}\nheader[data-v-317d1a6e] {\n  grid-area: header;\n  background-color: gray;\n}\nnav[data-v-317d1a6e] {\n  grid-area: nav;\n  background-color: blue;\n}\nmain[data-v-317d1a6e] {\n  grid-area: main;\n  background-color: red;\n}\nfooter[data-v-317d1a6e] {\n  grid-area: footer;\n  background: orange;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

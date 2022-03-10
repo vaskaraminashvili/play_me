@@ -48,9 +48,10 @@
                 ><span class="nav-link-text ps-1">Gulp</span>
               </div>
             </a>
-            <!-- parent pages--><a
+            <!-- parent pages-->
+            <Link
               class="nav-link"
-              href="documentation/design-file.html"
+              :href="route('admin.users')"
               role="button"
               aria-expanded="false"
             >
@@ -59,7 +60,7 @@
                   ><span class="fas fa-palette"></span></span
                 ><span class="nav-link-text ps-1">Design file</span>
               </div>
-            </a>
+            </Link>
             <!-- parent pages--><a
               class="nav-link"
               href="changelog.html"

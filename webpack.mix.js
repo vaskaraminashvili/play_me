@@ -13,7 +13,13 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .vue(3)
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ])
+    // .postCss('resources/css/app.css', 'public/css', [
+    //     //
+    // ])
+    .copyDirectory("resources/admin_template/assets", "public/assets")
+    .copyDirectory("resources/admin_template/vendors", "public/vendors")
+    .sass('resources/sass/admin/app.scss', 'public/css').options({
+        processCssUrls: false
+    })
+    .sass('resources/sass/app.scss', 'public/css')
     .version();

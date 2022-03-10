@@ -8,7 +8,7 @@
       :class="isFluid ? 'container-fluid' : 'container'"
       data-layout="container"
     >
-      <SidebarComponent />
+      <SidebarComponent :class="navbarStyleClass" />
       <div class="content">
         <TopnavComponent />
         <div class="row">
@@ -93,34 +93,7 @@
           </div>
         </div>
       </div>
-      <hr />
-      <div class="d-flex justify-content-between">
-        <div class="d-flex align-items-start">
-          <img
-            class="me-2"
-            src="assets/img/icons/left-arrow-from-left.svg"
-            width="20"
-            alt=""
-          />
-          <div class="flex-1">
-            <h5 class="fs-0">RTL Mode</h5>
-            <p class="fs--1 mb-0">Switch your language direction</p>
-            <a
-              class="fs--1"
-              href="documentation/customization/configuration.html"
-              >RTL Documentation</a
-            >
-          </div>
-        </div>
-        <div class="form-check form-switch">
-          <input
-            class="form-check-input ms-0"
-            id="mode-rtl"
-            type="checkbox"
-            data-theme-control="isRTL"
-          />
-        </div>
-      </div>
+
       <hr />
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-start">
@@ -133,82 +106,19 @@
           <div class="flex-1">
             <h5 class="fs-0">Fluid Layout</h5>
             <p class="fs--1 mb-0">Toggle container layout system</p>
-            <a
-              class="fs--1"
-              href="documentation/customization/configuration.html"
-              >Fluid Documentation</a
-            >
           </div>
         </div>
         <div class="form-check form-switch">
           <input
             class="form-check-input ms-0"
-            id="mode-fluid"
             type="checkbox"
-            data-theme-control="isFluid"
+            @change="changeLayout"
+            :checked="isFluid"
           />
         </div>
       </div>
       <hr />
-      <div class="d-flex align-items-start">
-        <img
-          class="me-2"
-          src="assets/img/icons/paragraph.svg"
-          width="20"
-          alt=""
-        />
-        <div class="flex-1">
-          <h5 class="fs-0 d-flex align-items-center">Navigation Position</h5>
-          <p class="fs--1 mb-2">
-            Select a suitable navigation system for your web application
-          </p>
-          <div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                id="option-navbar-vertical"
-                type="radio"
-                name="navbar"
-                value="vertical"
-                data-page-url="modules/components/navs-and-tabs/vertical-navbar.html"
-                data-theme-control="navbarPosition"
-              />
-              <label class="form-check-label" for="option-navbar-vertical"
-                >Vertical</label
-              >
-            </div>
-            <div class="form-check form-check-inline">
-              <input
-                class="form-check-input"
-                id="option-navbar-top"
-                type="radio"
-                name="navbar"
-                value="top"
-                data-page-url="modules/components/navs-and-tabs/top-navbar.html"
-                data-theme-control="navbarPosition"
-              />
-              <label class="form-check-label" for="option-navbar-top"
-                >Top</label
-              >
-            </div>
-            <div class="form-check form-check-inline me-0">
-              <input
-                class="form-check-input"
-                id="option-navbar-combo"
-                type="radio"
-                name="navbar"
-                value="combo"
-                data-page-url="modules/components/navs-and-tabs/combo-navbar.html"
-                data-theme-control="navbarPosition"
-              />
-              <label class="form-check-label" for="option-navbar-combo"
-                >Combo</label
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr />
+
       <h5 class="fs-0 d-flex align-items-center">Vertical Navbar Style</h5>
       <p class="fs--1 mb-0">Switch between styles for your vertical navbar</p>
       <p>
@@ -227,7 +137,8 @@
               type="radio"
               name="navbarStyle"
               value="transparent"
-              data-theme-control="navbarStyle"
+              @change="verticalNavbar"
+              v-model="navbarStyleChecked"
             />
             <label
               class="btn d-block w-100 btn-navbar-style fs--1"
@@ -247,7 +158,8 @@
               type="radio"
               name="navbarStyle"
               value="inverted"
-              data-theme-control="navbarStyle"
+              @change="verticalNavbar"
+              v-model="navbarStyleChecked"
             />
             <label
               class="btn d-block w-100 btn-navbar-style fs--1"
@@ -267,7 +179,8 @@
               type="radio"
               name="navbarStyle"
               value="card"
-              data-theme-control="navbarStyle"
+              @change="verticalNavbar"
+              v-model="navbarStyleChecked"
             />
             <label
               class="btn d-block w-100 btn-navbar-style fs--1"
@@ -287,7 +200,8 @@
               type="radio"
               name="navbarStyle"
               value="vibrant"
-              data-theme-control="navbarStyle"
+              @change="verticalNavbar"
+              v-model="navbarStyleChecked"
             />
             <label
               class="btn d-block w-100 btn-navbar-style fs--1"
@@ -301,25 +215,6 @@
             >
           </div>
         </div>
-      </div>
-      <div class="text-center mt-5">
-        <img
-          class="mb-4"
-          src="assets/img/icons/spot-illustrations/47.png"
-          alt=""
-          width="120"
-        />
-        <h5>Like What You See?</h5>
-        <p class="fs--1">
-          Get Falcon now and create beautiful dashboards with hundreds of
-          widgets.
-        </p>
-        <a
-          class="mb-3 btn btn-primary"
-          href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template/"
-          target="_blank"
-          >Purchase</a
-        >
       </div>
     </div>
   </div>
@@ -379,9 +274,25 @@ export default {
     SidebarComponent,
     TopnavComponent,
   },
-  computed: {
-    isFluid() {
-      return JSON.parse(localStorage.getItem("isFluid"));
+
+  data() {
+    return {
+      isFluid: JSON.parse(localStorage.getItem("isFluid")),
+      navbarStyleClass: "navbar-" + localStorage.getItem("navbarStyle"),
+      navbarStyleChecked: localStorage.getItem("navbarStyle"),
+    };
+  },
+  computed: {},
+  methods: {
+    changeLayout(event) {
+      var value = event.target.checked;
+      this.isFluid = value;
+      localStorage.setItem("isFluid", value);
+    },
+    verticalNavbar(event) {
+      var value = event.target.value;
+      localStorage.setItem("navbarStyle", value);
+      this.navbarStyleClass = "navbar-" + value;
     },
   },
 };

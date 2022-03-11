@@ -8,14 +8,14 @@
       :class="isFluid ? 'container-fluid' : 'container'"
       data-layout="container"
     >
-      <SidebarComponent :class="navbarStyleClass" />
+      <SidebarComponent :class="navbarStyleClass"/>
       <div class="content">
-        <TopnavComponent />
+        <TopnavComponent/>
         <div class="row">
-          <slot />
+          <slot/>
         </div>
         <!-- footer -->
-        <FooterComponent />
+        <FooterComponent/>
       </div>
     </div>
   </main>
@@ -63,10 +63,10 @@
               for="themeSwitcherLight"
             >
               <span class="hover-overlay mb-2 rounded d-block"
-                ><img
-                  class="img-fluid img-prototype mb-0"
-                  src="assets/img/generic/falcon-mode-default.jpg"
-                  alt="" /></span
+              ><img
+                class="img-fluid img-prototype mb-0"
+                src="assets/img/generic/falcon-mode-default.jpg"
+                alt=""/></span
               ><span class="label-text">Light</span></label
             >
           </div>
@@ -84,17 +84,17 @@
               for="themeSwitcherDark"
             >
               <span class="hover-overlay mb-2 rounded d-block"
-                ><img
-                  class="img-fluid img-prototype mb-0"
-                  src="assets/img/generic/falcon-mode-dark.jpg"
-                  alt="" /></span
+              ><img
+                class="img-fluid img-prototype mb-0"
+                src="assets/img/generic/falcon-mode-dark.jpg"
+                alt=""/></span
               ><span class="label-text"> Dark</span></label
             >
           </div>
         </div>
       </div>
 
-      <hr />
+      <hr/>
       <div class="d-flex justify-content-between">
         <div class="d-flex align-items-start">
           <img
@@ -117,7 +117,7 @@
           />
         </div>
       </div>
-      <hr />
+      <hr/>
 
       <h5 class="fs-0 d-flex align-items-center">Vertical Navbar Style</h5>
       <p class="fs--1 mb-0">Switch between styles for your vertical navbar</p>
@@ -125,7 +125,7 @@
         <a
           class="fs--1"
           href="modules/components/navs-and-tabs/vertical-navbar.html#navbar-styles"
-          >See Documentation</a
+        >See Documentation</a
         >
       </p>
       <div class="btn-group d-block w-100 btn-group-navbar-style">
@@ -230,10 +230,10 @@
       >
         <div class="settings-popover">
           <span class="ripple"
-            ><span class="fa-spin position-absolute all-0 d-flex flex-center"
-              ><span
-                class="icon-spin position-absolute all-0 d-flex flex-center"
-              >
+          ><span class="fa-spin position-absolute all-0 d-flex flex-center"
+          ><span
+            class="icon-spin position-absolute all-0 d-flex flex-center"
+          >
                 <svg
                   width="20"
                   height="20"
@@ -258,7 +258,7 @@
           ps-1
           rounded-end
         "
-        >customize</small
+      >customize</small
       >
     </div>
   </a>
@@ -268,6 +268,7 @@
 import FooterComponent from "./FooterComponent.vue";
 import SidebarComponent from "./SidebarComponent.vue";
 import TopnavComponent from "./TopnavComponent.vue";
+
 export default {
   components: {
     FooterComponent,

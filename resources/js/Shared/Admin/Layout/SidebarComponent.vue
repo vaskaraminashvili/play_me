@@ -38,14 +38,14 @@
 
             <!-- parent pages--><a
               class="nav-link"
-              href="documentation/gulp.html"
+              :href="route('admin.posts.index')"
               role="button"
               aria-expanded="false"
             >
               <div class="d-flex align-items-center">
                 <span class="nav-link-icon"
-                  ><span class="fab fa-gulp"></span></span
-                ><span class="nav-link-text ps-1">Gulp</span>
+                  ><span class="fas fa-folder"></span></span
+                ><span class="nav-link-text ps-1">Posts</span>
               </div>
             </a>
             <!-- parent pages-->

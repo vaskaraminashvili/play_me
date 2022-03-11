@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Post;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\LaravelIgnition\Recorders\QueryRecorder\Query;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\QueryBuilderRequest;
 
 class PostController extends Controller
 {
@@ -18,22 +20,23 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = QueryBuilder::for(Post::class)
-        ->allowedFilters(['id', 'title'])
-        ->allowedSorts('id', 'title')
-        ->paginate(10)
-        ->withQueryString()
-        ->through(
-            fn ($post) => [
-                'id' => $post->id,
-                'title' => $post->title,
-                'status' => $post->status,
-            ]
-        );
+            ->allowedFilters(['id', 'title'])
+            ->defaultSorts(['-id'])
+            ->allowedSorts(['id', 'title','status'])
+            ->paginate(20)
+            ->withQueryString()
+            ->through(
+                fn($post) => [
+                    'id' => $post->id,
+                    'title' => $post->title,
+                    'status' => $post->status,
+                ]
+            );
 
-        return Inertia::render('Admin/Post/Index', [
+        return Inertia::render('Post/Index', [
             'posts' => $posts,
-            'filters' => $request->only(['filter'])['filter'] ?? '',
-            'sort' => $request->only(['filter'])['filter'] ?? '',
+            'filters' => $request->only(['filter'])['filter'] ?? (object)[], // pass empty object
+            'sort' => $request->only(['sort'])['sort'] ?? '',
         ]);
     }
 

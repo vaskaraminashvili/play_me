@@ -32,7 +32,6 @@ class PostController extends Controller
                     'status' => $post->status,
                 ]
             );
-
         return Inertia::render('Post/Index', [
             'posts' => $posts,
             'filters' => $request->only(['filter'])['filter'] ?? (object)[], // pass empty object

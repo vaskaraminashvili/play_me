@@ -95,6 +95,7 @@
         "tinymce": "^5.8.1",
         "typed.js": "^2.0.12",
         "vue": "^3.2.31",
+        "vue-flatpickr-component": "^9.0.5",
         "ziggy-js": "^1.4.3"
     }
 }

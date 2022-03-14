@@ -40,6 +40,15 @@
             />
           </div>
         </div>
+        <div class="col-xl-3">
+          <div class="mb-3">
+            <label class="form-label" for="datetimepicker">Start Date</label>
+            <input class="form-control datetimepicker" id="datetimepicker" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
+            Range
+            Select Time Range
+            <flat-pickr v-model="date"></flat-pickr>
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-xl-12">
@@ -103,10 +112,13 @@ import Paginator from "@/Admin/Shared/Common/Paginator";
 import {debounce} from "lodash";
 import route from "../../../../../vendor/tightenco/ziggy/src/js";
 
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 export default {
   components: {
     Card,
     Paginator,
+    flatPickr,
   },
   props: {
     posts: Object,
@@ -136,7 +148,7 @@ export default {
         this.sort = sortColumn;
       }
     },
-    clearFilter(){
+    clearFilter() {
       this.$inertia.get(
         route("admin.posts.index"),
       );

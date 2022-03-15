@@ -3,12 +3,12 @@
     <template v-slot:header>
       <h5 class="mb-0" data-anchor="data-anchor" id="pagination-with-numbering">
         Pagination with numbering<a
-        class="anchorjs-link"
-        aria-label="Anchor"
-        data-anchorjs-icon="#"
-        href="#pagination-with-numbering"
-        style="padding-left: 0.375em"
-      ></a>
+          class="anchorjs-link"
+          aria-label="Anchor"
+          data-anchorjs-icon="#"
+          href="#pagination-with-numbering"
+          style="padding-left: 0.375em"
+        ></a>
       </h5>
       <p class="mb-0 mt-2 mb-0">
         Add <code> pagination </code> class for enable number pagination. The
@@ -31,28 +31,31 @@
         </div>
         <div class="col-xl-3">
           <div class="mb-3">
-            <label class="form-label">Title</label>
-            <input
-              class="form-control"
-              type="text"
-              placeholder="Title"
-              v-model="search.title"
-            />
+            <BaseInput label="Title" v-model="search.title" type="text" />
           </div>
         </div>
         <div class="col-xl-3">
+          <BaseSelect label="select" v-model="option" :options="options" />
+        </div>
+        <div class="col-xl-3">
           <div class="mb-3">
-            <label class="form-label" for="datetimepicker">Start Date</label>
-            <input class="form-control datetimepicker" id="datetimepicker" type="text" placeholder="d/m/y H:i" data-options='{"enableTime":true,"dateFormat":"d/m/y H:i","disableMobile":true}' />
-            Range
-            Select Time Range
-            <flat-pickr v-model="date"></flat-pickr>
+            <label class="form-label">Start Date</label>
+            <flat-pickr
+              v-model="date"
+              class="form-control datetimepicker"
+            ></flat-pickr>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xl-12">
-          <button @click="clearFilter" class="btn btn-outline-warning me-1 mb-2" type="button">Clear filter</button>
+          <button
+            @click="clearFilter"
+            class="btn btn-outline-warning me-1 mb-2"
+            type="button"
+          >
+            Clear filter
+          </button>
         </div>
       </div>
       <div
@@ -62,45 +65,45 @@
         <div class="table-responsive scrollbar">
           <table class="table table-bordered table-striped fs--1 mb-0">
             <thead class="bg-200 text-900">
-            <tr>
-              <th
-                @click="sortColumn"
-                class="sort"
-                data-sortColumn="id"
-                :data-sort="sort.id"
-              >
-                ID
-              </th>
-              <th
-                @click="sortColumn"
-                class="sort"
-                data-sortColumn="title"
-                :data-sort="sort.title"
-              >
-                Title
-              </th>
-              <th
-                @click="sortColumn"
-                class="sort"
-                data-sortColumn="status"
-                :data-sort="sort.status"
-              >
-                Status
-              </th>
-              <th>Actions</th>
-            </tr>
+              <tr>
+                <th
+                  @click="sortColumn"
+                  class="sort"
+                  data-sortColumn="id"
+                  :data-sort="sort.id"
+                >
+                  ID
+                </th>
+                <th
+                  @click="sortColumn"
+                  class="sort"
+                  data-sortColumn="title"
+                  :data-sort="sort.title"
+                >
+                  Title
+                </th>
+                <th
+                  @click="sortColumn"
+                  class="sort"
+                  data-sortColumn="status"
+                  :data-sort="sort.status"
+                >
+                  Status
+                </th>
+                <th>Actions</th>
+              </tr>
             </thead>
             <tbody class="list">
-            <tr v-for="post in posts.data" :key="post.id">
-              <td class="id">{{ post.id }}</td>
-              <td class="title">{{ post.title }}</td>
-              <td class="status">{{ post.status }}</td>
-              <td>Actions here</td>
-            </tr>
+              <tr v-for="post in posts.data" :key="post.id">
+                <td class="id">{{ post.id }}</td>
+                <td class="title">{{ post.title }}</td>
+                <td class="status">{{ post.status }}</td>
+                <td>Actions here</td>
+              </tr>
             </tbody>
           </table>
         </div>
-        <Paginator :links="posts.links"/>
+        <Paginator :links="posts.links" />
       </div>
     </template>
   </Card>
@@ -109,13 +112,16 @@
 <script>
 import Card from "@/Admin/Shared/Common/Card";
 import Paginator from "@/Admin/Shared/Common/Paginator";
-import {debounce} from "lodash";
+import { debounce } from "lodash";
 import route from "../../../../../vendor/tightenco/ziggy/src/js";
 
-import flatPickr from 'vue-flatpickr-component';
-import 'flatpickr/dist/flatpickr.css';
+import flatPickr from "vue-flatpickr-component";
+import "flatpickr/dist/flatpickr.css";
+
 export default {
   components: {
+    BaseSelect,
+    BaseInput,
     Card,
     Paginator,
     flatPickr,
@@ -132,12 +138,15 @@ export default {
         title: this.filters.title ? this.filters.title : "",
       },
       sort: "id",
+      date: "",
+      options: ["one", "sec", "third"],
+      option: "",
     };
   },
   computed: {
     queryString() {
       return this.search.id + "+test=" + this.search.title;
-    }
+    },
   },
   methods: {
     sortColumn(e) {
@@ -149,10 +158,8 @@ export default {
       }
     },
     clearFilter() {
-      this.$inertia.get(
-        route("admin.posts.index"),
-      );
-    }
+      this.$inertia.get(route("admin.posts.index"));
+    },
   },
   watch: {
     search: {
@@ -178,7 +185,7 @@ export default {
           {
             "filter[id]": this.search.id,
             "filter[title]": this.search.title,
-            "sort": val,
+            sort: val,
           },
           {
             preserveState: true, // to preserve state of the input and not to input on every char insert

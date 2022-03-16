@@ -120,8 +120,6 @@ import "flatpickr/dist/flatpickr.css";
 
 export default {
   components: {
-    BaseSelect,
-    BaseInput,
     Card,
     Paginator,
     flatPickr,

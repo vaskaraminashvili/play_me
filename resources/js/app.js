@@ -6,13 +6,7 @@ import route from 'ziggy-js';
 import { upperFirst, camelCase } from "lodash"
 
 
-// load components automaticaly
-// Vue 3 Forms lesson 4
-const requireComponent = require.context(
-  './Admin/Shared/Common/Form',
-  false,
-  /Base[A-Z]\w+\.(vue|js)$/
-)
+
 createInertiaApp({
   title: title => `${title} - Scc`,
   resolve: async name => {
@@ -33,25 +27,43 @@ createInertiaApp({
     return page
   },
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+    const app = createApp({ render: () => h(App, props) })
       .use(plugin)
       .component('Link', Link)
       .component('Head', Head)
-      .mixin({ methods: { route } })
-      .mount(el)
+      .mixin({ methods: { route } });
+
+    if (true) {// we need some condition to load this componets for admin only!!!
+      // load this for admin
+      // load components automaticaly
+      // Vue 3 Forms lesson 4
+      const requireComponent = require.context(
+        './Admin/Shared/Form',
+        false,
+        /Base[A-Z]\w+\.(vue|js)$/
+      )
+      requireComponent.keys().forEach(fileName => {
+        const componentConfig = requireComponent(fileName)
+
+        const componentName = upperFirst(
+          camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1'))
+        )
+        app.component(componentName, componentConfig.default || componentConfig)
+      })
+
+    } else {
+      // load this for website
+
+
+    }
+
+
+    app.mount(el);
+
   },
 })
 
-
-requireComponent.keys().forEach(fileName => {
-  const componentConfig = requireComponent(fileName)
-
-  const componentName = upperFirst(
-    camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1'))
-  )
-
-  App.component(componentName, componentConfig.default || componentConfig)
-})
+// console.log(app);
 
 
 

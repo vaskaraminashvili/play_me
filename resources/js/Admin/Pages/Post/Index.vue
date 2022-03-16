@@ -18,25 +18,9 @@
     </template>
     <template v-slot:default>
       <div class="row">
-        <div class="col-xl-3">
-          <div class="mb-3">
-            <label class="form-label">ID</label>
-            <input
-              class="form-control"
-              type="number"
-              placeholder="ID"
-              v-model="search.id"
-            />
-          </div>
-        </div>
-        <div class="col-xl-3">
-          <div class="mb-3">
-            <BaseInput label="Title" v-model="search.title" type="text" />
-          </div>
-        </div>
-        <div class="col-xl-3">
-          <BaseSelect label="select" v-model="option" :options="options" />
-        </div>
+        <BaseInput label="ID" v-model="selected['filter[id]']" />
+        <BaseInput label="Title" v-model="selected['filter[title]']" />
+        <BaseCheckbox label="Status" v-model="selected['filter[status]']" />
         <div class="col-xl-3">
           <div class="mb-3">
             <label class="form-label">Start Date</label>
@@ -113,7 +97,6 @@
 import Card from "@/Admin/Shared/Common/Card";
 import Paginator from "@/Admin/Shared/Common/Paginator";
 import { debounce } from "lodash";
-import route from "../../../../../vendor/tightenco/ziggy/src/js";
 
 import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
@@ -131,67 +114,57 @@ export default {
   },
   data() {
     return {
-      search: {
-        id: this.filters.id ? this.filters.id : "",
-        title: this.filters.title ? this.filters.title : "",
+      selected: {
+        "filter[id]": this.filters.id ? this.filters.id : "",
+        "filter[title]": this.filters.title ? this.filters.title : "",
+        "filter[status]": this.filters.status ? this.filters.status : "",
       },
-      sort: "id",
-      date: "",
-      options: ["one", "sec", "third"],
-      option: "",
     };
   },
   computed: {
-    queryString() {
-      return this.search.id + "+test=" + this.search.title;
-    },
+    // queryString() {
+    //   return this.search.id + "+test=" + this.search.title;
+    // },
   },
   methods: {
-    sortColumn(e) {
-      var sortColumn = e.target.getAttribute("data-sortColumn");
-      if (this.sort == sortColumn) {
-        this.sort = "-" + sortColumn;
-      } else {
-        this.sort = sortColumn;
-      }
-    },
-    clearFilter() {
-      this.$inertia.get(route("admin.posts.index"));
-    },
+    // sortColumn(e) {
+    //   var sortColumn = e.target.getAttribute("data-sortColumn");
+    //   if (this.sort == sortColumn) {
+    //     this.sort = "-" + sortColumn;
+    //   } else {
+    //     this.sort = sortColumn;
+    //   }
+    // },
+    // clearFilter() {
+    //   this.$inertia.get(route("admin.posts.index"));
+    // },
   },
   watch: {
-    search: {
-      handler: debounce(function (val) {
-        this.$inertia.get(
-          route("admin.posts.index"),
-          {
-            "filter[id]": val.id,
-            "filter[title]": val.title,
-          },
-          {
-            preserveState: true, // to preserve state of the input and not to input on every char insert
-            replace: true, // not to create browser history every time users types a char insead it just repalces it
-          }
-        );
+    selected: {
+      handler: debounce(function () {
+        this.$inertia.get(route("admin.posts.index"), this.selected, {
+          preserveState: true, // to preserve state of the input and not to input on every char insert
+          replace: true, // not to create browser history every time users types a char insead it just repalces it
+        });
       }, 300),
       deep: true,
     },
-    sort: {
-      handler: debounce(function (val) {
-        this.$inertia.get(
-          route("admin.posts.index"),
-          {
-            "filter[id]": this.search.id,
-            "filter[title]": this.search.title,
-            sort: val,
-          },
-          {
-            preserveState: true, // to preserve state of the input and not to input on every char insert
-            replace: true, // not to create browser history every time users types a char insead it just repalces it
-          }
-        );
-      }, 300),
-    },
+    // sort: {
+    //   handler: debounce(function (val) {
+    //     this.$inertia.get(
+    //       route("admin.posts.index"),
+    //       {
+    //         "filter[id]": this.search.id,
+    //         "filter[title]": this.search.title,
+    //         sort: val,
+    //       },
+    //       {
+    //         preserveState: true, // to preserve state of the input and not to input on every char insert
+    //         replace: true, // not to create browser history every time users types a char insead it just repalces it
+    //       }
+    //     );
+    //   }, 300),
+    // },
   },
 };
 </script>

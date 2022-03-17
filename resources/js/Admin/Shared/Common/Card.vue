@@ -7,11 +7,7 @@
         </div>
       </template>
       <div class="card-body">
-        <div class="row">
-          <div :class="'col-xl-' + cardInternalSize">
-            <slot />
-          </div>
-        </div>
+        <slot />
       </div>
     </div>
   </div>
@@ -19,15 +15,9 @@
 
 <script>
 export default {
-  mounted() {
-    console.log(this.$slots.header);
-  },
+  mounted() {},
   props: {
     cardSize: {
-      type: Number,
-      default: 12,
-    },
-    cardInternalSize: {
       type: Number,
       default: 12,
     },

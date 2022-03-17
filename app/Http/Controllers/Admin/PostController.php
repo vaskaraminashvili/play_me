@@ -65,6 +65,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        dd($id);
     }
 
     /**
@@ -74,8 +75,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
+        return Inertia::render('Post/Edit');
     }
 
     /**

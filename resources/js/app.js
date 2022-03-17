@@ -7,8 +7,11 @@ import { upperFirst, camelCase } from "lodash"
 
 
 
+InertiaProgress.init();
+
+
+
 createInertiaApp({
-  title: title => `${title} - Scc`,
   resolve: async name => {
     // You can even go a step further and conditionally set the default page layout based on the page name, which is available to the resolve() method. For example, maybe you don't want the default layout applied to your public pages.
     let page;
@@ -26,6 +29,7 @@ createInertiaApp({
     }
     return page
   },
+  title: (title) => title ? `${title} - Ping CRM` : 'Ping CRM',
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) })
       .use(plugin)
@@ -67,4 +71,3 @@ createInertiaApp({
 
 
 
-InertiaProgress.init()

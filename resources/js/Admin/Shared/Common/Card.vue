@@ -1,9 +1,11 @@
 <template>
   <div class="mb-3" :class="'col-xl-' + cardSize">
     <div class="card">
-      <div class="card-header">
-        <slot name="header">Fallback Header</slot>
-      </div>
+      <template v-if="$slots.header">
+        <div class="card-header">
+          <slot name="header">Fallback Header</slot>
+        </div>
+      </template>
       <div class="card-body">
         <div class="row">
           <div :class="'col-xl-' + cardInternalSize">
@@ -17,6 +19,9 @@
 
 <script>
 export default {
+  mounted() {
+    console.log(this.$slots.header);
+  },
   props: {
     cardSize: {
       type: Number,

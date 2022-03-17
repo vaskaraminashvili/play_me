@@ -1,4 +1,5 @@
 <template>
+  <Head title="Posts Table" />
   <Card>
     <template v-slot:header>
       <h5 class="mb-0" data-anchor="data-anchor" id="pagination-with-numbering">
@@ -20,7 +21,11 @@
       <div class="row">
         <BaseInput label="ID" v-model="selected['filter[id]']" />
         <BaseInput label="Title" v-model="selected['filter[title]']" />
-        <BaseCheckbox label="Status" v-model="selected['filter[status]']" />
+        <BaseSelect
+          label="Status"
+          v-model="selected['filter[status]']"
+          :options="options"
+        />
         <div class="col-xl-3">
           <div class="mb-3">
             <label class="form-label">Start Date</label>
@@ -54,7 +59,7 @@
                   @click="sortColumn"
                   class="sort"
                   data-sortColumn="id"
-                  :data-sort="sort.id"
+                  :data-sort="selected.sort.id"
                 >
                   ID
                 </th>
@@ -62,7 +67,7 @@
                   @click="sortColumn"
                   class="sort"
                   data-sortColumn="title"
-                  :data-sort="sort.title"
+                  :data-sort="selected.sort.title"
                 >
                   Title
                 </th>
@@ -70,7 +75,7 @@
                   @click="sortColumn"
                   class="sort"
                   data-sortColumn="status"
-                  :data-sort="sort.status"
+                  :data-sort="selected.sort.status"
                 >
                   Status
                 </th>
@@ -82,7 +87,45 @@
                 <td class="id">{{ post.id }}</td>
                 <td class="title">{{ post.title }}</td>
                 <td class="status">{{ post.status }}</td>
-                <td>Actions here</td>
+                <td class="text-end">
+                  <div class="d-flex justify-content-end">
+                    <Link
+                      class="btn p-0"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Edit"
+                      :href="route('admin.posts.edit', post.id)"
+                    >
+                      <span class="text-500 fas fa-edit"></span>
+                    </Link>
+                    <div class="dropdown font-sans-serif position-static">
+                      <button
+                        class="
+                          btn btn-link
+                          text-600
+                          btn-sm
+                          dropdown-toggle
+                          btn-reveal
+                        "
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        data-boundary="window"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <span class="fas fa-ellipsis-h fs--1"></span>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-end border py-0">
+                        <div class="bg-white py-2">
+                          <a class="dropdown-item" href="#!">Edit</a
+                          ><a class="dropdown-item text-danger" href="#!"
+                            >Delete</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -110,7 +153,7 @@ export default {
   props: {
     posts: Object,
     filters: Object,
-    sort: String,
+    // sort: String,
   },
   data() {
     return {
@@ -118,7 +161,9 @@ export default {
         "filter[id]": this.filters.id ? this.filters.id : "",
         "filter[title]": this.filters.title ? this.filters.title : "",
         "filter[status]": this.filters.status ? this.filters.status : "",
+        sort: "",
       },
+      options: [0, 1],
     };
   },
   computed: {
@@ -127,17 +172,17 @@ export default {
     // },
   },
   methods: {
-    // sortColumn(e) {
-    //   var sortColumn = e.target.getAttribute("data-sortColumn");
-    //   if (this.sort == sortColumn) {
-    //     this.sort = "-" + sortColumn;
-    //   } else {
-    //     this.sort = sortColumn;
-    //   }
-    // },
-    // clearFilter() {
-    //   this.$inertia.get(route("admin.posts.index"));
-    // },
+    sortColumn(e) {
+      var sortColumn = e.target.getAttribute("data-sortColumn");
+      if (this.selected.sort == sortColumn) {
+        this.selected.sort = "-" + sortColumn;
+      } else {
+        this.selected.sort = sortColumn;
+      }
+    },
+    clearFilter() {
+      this.$inertia.get(route("admin.posts.index"));
+    },
   },
   watch: {
     selected: {
@@ -149,22 +194,6 @@ export default {
       }, 300),
       deep: true,
     },
-    // sort: {
-    //   handler: debounce(function (val) {
-    //     this.$inertia.get(
-    //       route("admin.posts.index"),
-    //       {
-    //         "filter[id]": this.search.id,
-    //         "filter[title]": this.search.title,
-    //         sort: val,
-    //       },
-    //       {
-    //         preserveState: true, // to preserve state of the input and not to input on every char insert
-    //         replace: true, // not to create browser history every time users types a char insead it just repalces it
-    //       }
-    //     );
-    //   }, 300),
-    // },
   },
 };
 </script>

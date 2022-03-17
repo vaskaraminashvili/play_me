@@ -12,15 +12,16 @@ const webpackConfig = require('./webpack.config');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .vue(3)
-    // .postCss('resources/css/app.css', 'public/css', [
-    //     //
-    // ])
-    .webpackConfig(webpackConfig)
-    .copyDirectory("resources/admin_template/assets", "public/assets")
-    .copyDirectory("resources/admin_template/vendors", "public/vendors")
-    .sass('resources/sass/admin/app.scss', 'public/css').options({
-        processCssUrls: false
-    })
-    .sass('resources/sass/app.scss', 'public/css')
-    .version();
+  .vue(3)
+  // .postCss('resources/css/app.css', 'public/css', [
+  //     //
+  // ])
+  .webpackConfig(webpackConfig)
+  // .copyDirectory("resources/admin_template/assets", "public/assets")
+  // .copyDirectory("resources/admin_template/vendors", "public/vendors")
+  .sass('resources/sass/admin/app.scss', 'public/css').options({
+    processCssUrls: false
+  })
+  .sass('resources/sass/app.scss', 'public/css')
+  .version()
+  .sourceMaps();

@@ -1,9 +1,10 @@
 <template>
-    <Head title="Post Edit" />
+  <Head title="Post Edit" />
   <Card>
-        <template v-slot:header>
+    <template v-slot:header>
       <h5 class="mb-0" data-anchor="data-anchor" id="pagination-with-numbering">
-        Pagination with numbering<a
+        Pagination with numbering
+        <a
           class="anchorjs-link"
           aria-label="Anchor"
           data-anchorjs-icon="#"
@@ -12,15 +13,16 @@
         ></a>
       </h5>
       <p class="mb-0 mt-2 mb-0">
-        Add <code> pagination </code> class for enable number pagination. The
+        Add
+        <code>pagination</code> class for enable number pagination. The
         following structure will enable number pagination with next and previous
         button.
       </p>
     </template>
     <template v-slot:default>
       <div class="row">
-        <BaseInput col="6" />
-
+        <BaseInput col="12" v-model="post.title" />
+        <BaseTextarea v-model="post.body" />
       </div>
       <div class="row">
         <div class="col-xl-12">
@@ -28,18 +30,25 @@
             @click="clearFilter"
             class="btn btn-outline-warning me-1 mb-2"
             type="button"
-          >
-            Clear filter
-          </button>
+          >Clear filter</button>
         </div>
       </div>
-
     </template>
   </Card>
 </template>
 
 <script setup>
-import BaseInput from '../../Shared/Form/BaseInput.vue';
+
+import BaseInput from '@Shared/Form/BaseInput.vue';
+import Editor from '@tinymce/tinymce-vue'
+import BaseTextarea from '../../Shared/Form/BaseTextarea.vue';
+defineProps({
+  post: {
+    type: Object,
+    required: true
+  }
+})
+
 </script>
 
 <style lang="scss" scoped>

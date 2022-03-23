@@ -2,7 +2,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3'
 import Card from "@/Admin/Shared/Common/Card"
 import { InertiaProgress } from '@inertiajs/progress'
-import Layout from "./Admin/Shared/Layout/Layout.vue"
+import Layout from "@/Admin/Shared/Layout/Layout.vue"
 import route from 'ziggy-js';
 import { upperFirst, camelCase } from "lodash"
 

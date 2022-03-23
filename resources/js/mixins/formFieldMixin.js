@@ -5,7 +5,7 @@ export const formFieldMixin = {
       default: "",
     },
     col: {
-      type: Number,
+      type: [String, Number],
       default: 3,
     },
   }

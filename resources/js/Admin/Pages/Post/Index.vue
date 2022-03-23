@@ -137,7 +137,6 @@
 </template>
 
 <script>
-
 import Paginator from "@/Admin/Shared/Common/Paginator";
 import { debounce } from "lodash";
 
@@ -146,7 +145,6 @@ import "flatpickr/dist/flatpickr.css";
 
 export default {
   components: {
-    Card,
     Paginator,
     flatPickr,
   },

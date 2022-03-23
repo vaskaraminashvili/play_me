@@ -10,7 +10,7 @@
 export default {
   props: {
     col: {
-      type: Number,
+      type: [String, Number],
       default: 3,
     },
   },

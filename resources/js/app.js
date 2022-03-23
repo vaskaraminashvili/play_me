@@ -1,5 +1,6 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3'
+import Card from "@/Admin/Shared/Common/Card"
 import { InertiaProgress } from '@inertiajs/progress'
 import Layout from "./Admin/Shared/Layout/Layout.vue"
 import route from 'ziggy-js';
@@ -35,6 +36,7 @@ createInertiaApp({
       .use(plugin)
       .component('Link', Link)
       .component('Head', Head)
+      .component('Card', Card)
       .mixin({ methods: { route } });
 
     if (true) {// we need some condition to load this componets for admin only!!!

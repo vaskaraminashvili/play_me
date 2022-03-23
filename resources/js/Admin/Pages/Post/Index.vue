@@ -137,7 +137,7 @@
 </template>
 
 <script>
-import Card from "@/Admin/Shared/Common/Card";
+
 import Paginator from "@/Admin/Shared/Common/Paginator";
 import { debounce } from "lodash";
 
